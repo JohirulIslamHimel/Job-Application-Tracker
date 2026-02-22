@@ -58,3 +58,44 @@ for (const card of allCards) {
     mainJobCount.innerText = currentTotal - 1;
   };
 }
+
+// button selection
+
+const allBtn = document.getElementById("all-btn");
+const interviewTabBtn = document.getElementById("interview-btn");
+const rejectedTabBtn = document.getElementById("rejected-btn");
+
+// filter function
+function filterCards(status) {
+  const currentCards = document.querySelectorAll(".card");
+
+  for (const card of currentCards) {
+    const cardStatus = card.querySelector(".status").innerText.toUpperCase();
+
+    if (status === "ALL") {
+      card.style.display = "flex";
+    } else if (cardStatus === status) {
+      card.style.display = "flex";
+    } else {
+      card.style.display = "none";
+    }
+  }
+}
+
+// all btn :
+allBtn.addEventListener("click", function () {
+  filterCards("ALL");
+  updateTabStyle(allBtn);
+});
+
+// interview btn:
+interviewTabBtn.addEventListener("click", function () {
+  filterCards("INTERVIEW");
+  updateTabStyle(interviewTabBtn);
+});
+
+// rejected btn:
+rejectedTabBtn.addEventListener("click", function () {
+  filterCards("REJECTED");
+  updateTabStyle(rejectedTabBtn);
+});
