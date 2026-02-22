@@ -8,7 +8,7 @@ const allCards = document.querySelectorAll(".card");
 for (const card of allCards) {
   const intBtn = card.querySelector(".int-btn");
   const rejBtn = card.querySelector(".rej-btn");
-  const deleteBtn = card.querySelector(".fa-trash").parentElement;
+  const deleteBtn = card.querySelector(".delete-btn");
   const statusBadge = card.querySelector(".status");
 
   // Interview btn click
