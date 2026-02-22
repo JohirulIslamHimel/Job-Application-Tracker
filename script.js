@@ -56,6 +56,14 @@ for (const card of allCards) {
     const currentTotal = parseInt(totalCount.innerText);
     totalCount.innerText = currentTotal - 1;
     mainJobCount.innerText = currentTotal - 1;
+
+    if (allBtn.classList.contains("bg-[#3B82F6]")) {
+      filterCards("ALL");
+    } else if (interviewTabBtn.classList.contains("bg-[#3B82F6]")) {
+      filterCards("INTERVIEW");
+    } else {
+      filterCards("REJECTED");
+    }
   };
 }
 
@@ -69,16 +77,31 @@ const rejectedTabBtn = document.getElementById("rejected-btn");
 function filterCards(status) {
   const currentCards = document.querySelectorAll(".card");
 
+  const noJobsMsg = document.getElementById("no-jobs-msg");
+
+  let visibleCount = 0;
+
   for (const card of currentCards) {
     const cardStatus = card.querySelector(".status").innerText.toUpperCase();
 
     if (status === "ALL") {
       card.style.display = "flex";
+      visibleCount++;
     } else if (cardStatus === status) {
       card.style.display = "flex";
+      visibleCount++;
     } else {
       card.style.display = "none";
     }
+  }
+  mainJobCount.innerText = visibleCount;
+
+  if (visibleCount === 0) {
+    noJobsMsg.classList.remove("hidden");
+    noJobsMsg.classList.add("flex");
+  } else {
+    noJobsMsg.classList.add("hidden");
+    noJobsMsg.classList.remove("flex");
   }
 }
 
