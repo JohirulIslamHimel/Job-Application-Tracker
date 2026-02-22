@@ -99,3 +99,13 @@ rejectedTabBtn.addEventListener("click", function () {
   filterCards("REJECTED");
   updateTabStyle(rejectedTabBtn);
 });
+
+function updateTabStyle(activeBtn) {
+  const tabs = [allBtn, interviewTabBtn, rejectedTabBtn];
+  for (const btn of tabs) {
+    btn.classList.remove("bg-[#3B82F6]", "text-white");
+    btn.classList.add("border", "border-gray-200");
+  }
+  activeBtn.classList.add("bg-[#3B82F6]", "text-white");
+  activeBtn.classList.remove("border", "border-gray-200");
+}
