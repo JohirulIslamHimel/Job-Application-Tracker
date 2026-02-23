@@ -3,6 +3,8 @@ const mainJobCount = document.getElementById("main-job-count");
 const interviewCount = document.getElementById("interview-count");
 const rejectedCount = document.getElementById("rejected-count");
 
+let currentActiveFilter = "ALL";
+
 const allCards = document.querySelectorAll(".card");
 
 for (const card of allCards) {
@@ -24,6 +26,7 @@ for (const card of allCards) {
       statusBadge.style.backgroundColor = "#DCFCE7";
       statusBadge.style.color = "#166534";
     }
+    filterCards(currentActiveFilter);
   };
 
   // Reject btn click
@@ -39,6 +42,7 @@ for (const card of allCards) {
       statusBadge.style.backgroundColor = "#FEE2E2";
       statusBadge.style.color = "#991B1B";
     }
+    filterCards(currentActiveFilter);
   };
 
   // Delete btn click
@@ -107,18 +111,21 @@ function filterCards(status) {
 
 // all btn :
 allBtn.addEventListener("click", function () {
+  currentActiveFilter = "ALL";
   filterCards("ALL");
   updateTabStyle(allBtn);
 });
 
 // interview btn:
 interviewTabBtn.addEventListener("click", function () {
+  currentActiveFilter = "INTERVIEW";
   filterCards("INTERVIEW");
   updateTabStyle(interviewTabBtn);
 });
 
 // rejected btn:
 rejectedTabBtn.addEventListener("click", function () {
+  currentActiveFilter = "REJECTED";
   filterCards("REJECTED");
   updateTabStyle(rejectedTabBtn);
 });
