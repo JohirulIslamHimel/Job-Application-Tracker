@@ -49,6 +49,12 @@ for (const card of allCards) {
   deleteBtn.onclick = function () {
     const currentStatus = statusBadge.innerText.toUpperCase();
 
+    const isConfirmed = confirm("Are you sure you want to delete this job?");
+
+    if (!isConfirmed) {
+      return;
+    }
+
     if (currentStatus === "INTERVIEW") {
       interviewCount.innerText = parseInt(interviewCount.innerText) - 1;
     } else if (currentStatus === "REJECTED") {
