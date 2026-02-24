@@ -14,7 +14,7 @@ for (const card of allCards) {
   const statusBadge = card.querySelector(".status");
 
   // Interview btn click
-  intBtn.onclick = function () {
+  intBtn.addEventListener("click", function () {
     const currentStatus = statusBadge.innerText.toUpperCase();
 
     if (currentStatus !== "INTERVIEW") {
@@ -27,10 +27,10 @@ for (const card of allCards) {
       statusBadge.style.color = "#166534";
     }
     filterCards(currentActiveFilter);
-  };
+  });
 
   // Reject btn click
-  rejBtn.onclick = function () {
+  rejBtn.addEventListener("click", function () {
     const currentStatus = statusBadge.innerText.toUpperCase();
 
     if (currentStatus !== "REJECTED") {
@@ -43,17 +43,12 @@ for (const card of allCards) {
       statusBadge.style.color = "#991B1B";
     }
     filterCards(currentActiveFilter);
-  };
+  });
 
   // Delete btn click
-  deleteBtn.onclick = function () {
+
+  deleteBtn.addEventListener("click", function () {
     const currentStatus = statusBadge.innerText.toUpperCase();
-
-    const isConfirmed = confirm("Are you sure you want to delete this job?");
-
-    if (!isConfirmed) {
-      return;
-    }
 
     if (currentStatus === "INTERVIEW") {
       interviewCount.innerText = parseInt(interviewCount.innerText) - 1;
@@ -74,7 +69,8 @@ for (const card of allCards) {
     } else {
       filterCards("REJECTED");
     }
-  };
+    alert("Application Deleted Successfully!");
+  });
 }
 
 // button selection
@@ -88,6 +84,8 @@ function filterCards(status) {
   const currentCards = document.querySelectorAll(".card");
 
   const noJobsMsg = document.getElementById("no-jobs-msg");
+
+  const totalAvailableJobs = currentCards.length;
 
   let visibleCount = 0;
 
@@ -104,7 +102,12 @@ function filterCards(status) {
       card.style.display = "none";
     }
   }
-  mainJobCount.innerText = visibleCount;
+
+  if (status === "ALL") {
+    mainJobCount.innerText = `${totalAvailableJobs} Jobs`;
+  } else {
+    mainJobCount.innerText = `${visibleCount} of ${totalAvailableJobs} Jobs`;
+  }
 
   if (visibleCount === 0) {
     noJobsMsg.classList.remove("hidden");
